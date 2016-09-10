@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 var path = require('path');
@@ -75,27 +77,15 @@ function repNotes(obj) {
   return {
       
     add: function (text, complete) {
-      return obj.one("INSERT INTO items(text, complete) VALUES($1, $2) RETURNING id",
-        [text, complete])
-        .then(data=> {
-            return data.id;
-      });
+      return obj.one("INSERT INTO items(text, complete) VALUES($1, $2) RETURNING id", [text, complete], i=>i.id);
     },
    	// Get number of notes
     count: function () {
-      return obj.one("SELECT count(*) FROM items")
-        .then(data=> {
-          return data.count;
-      });
+      return obj.one("SELECT count(*) FROM items", [], i=>+i.count);
     },
     // Find notes by id
     findById: function (idNotes) {
-      return obj.any("SELECT text from items WHERE id = $1", [idNotes])
-        .then(data=> {
-          return data.map(m=> {
-            return m.text;
-          });
-      });
+      return obj.map("SELECT text from items WHERE id = $1", idNotes, i=>i.text);
     }
       
   }
