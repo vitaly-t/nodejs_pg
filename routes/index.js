@@ -11,7 +11,7 @@ var monitor = require('pg-monitor');
  
 // pg-promise initialization options:
 var options = {
-    capTX: true, // capitalize transaction commands;
+    capSQL: true, // capitalize all generated SQL;
     extend: function () {
         // our 'notes' repository extension:
         this.notes = repNotes(this);
