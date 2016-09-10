@@ -1,1 +1,1 @@
-Based on (article)[http://blog.vitalytomilov.com/about-2/]
+Based on [article](http://blog.vitalytomilov.com/about-2/)
